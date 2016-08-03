@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			-webkit-perspective: 1000px;
+			background-image: url('img/bg3.jpg');
+			-webkit-background-size: cover;
+			background-size: cover;
+		}
+		#container0{
+			width: 200px;
+			height: 200px;
+			position: absolute;
+			left: 50%;
+			margin-left: -100px;
+			top: 100px;
+			z-index: 1;
+			-webkit-transform-style: preserve-3d;
+			-webkit-transition: transform 0.5s ease;
+		}
+		#container1{
+			width: 200px;
+			height: 200px;
+			position: absolute;
+			left: 50%;
+			margin-left: -100px;
+			top: 320px;
+			-webkit-transform-style: preserve-3d;
+			-webkit-transition: transform 0.5s ease;
+		}
+		.cube{
+			width: 200px;
+			height: 200px;
+			position: absolute;
+		}
+		.four{
+			background-image: url(img/4.jpg);
+			-webkit-transform: rotateY(180deg)  scale3d(1.2,1.2,1.2) translateZ(100px);
+		}
+		.three{
+			background-image: url(img/3.jpg);
+			-webkit-transform: rotateY(90deg) scale3d(1.2,1.2,1.2) translateZ(100px) ;
+		}
+		.five{
+			background-image: url(img/5.jpg);
+
+			-webkit-transform: rotateY(-90deg) scale3d(1.2,1.2,1.2) translateZ(100px) ;
+		}
+		.one{
+			background-color: #000;
+			-webkit-transform: rotateX(90deg) scale3d(1.2,1.2,1.2) translateZ(100px) ;
+		}
+		.six{
+			background-color: #000;
+			-webkit-transform: rotateX(-90deg) scale3d(1.2,1.2,1.2) translateZ(100px) ;
+		}
+		.two{
+			background-image: url(img/2.jpg);
+			-webkit-transform: scale3d(1.2,1.2,1.2) translateZ(100px) ;
+		}
+		.ten{
+			background-image: url(img/4.jpg);
+			background-position: 0 -200px;
+			-webkit-transform: rotateY(180deg)  scale3d(1.2,1.2,1.2) translateZ(100px);
+		}
+		.nine{
+			background-image: url(img/3.jpg);
+			background-position: 0 -200px;
+			-webkit-transform: rotateY(90deg) scale3d(1.2,1.2,1.2) translateZ(100px) ;
+		}
+		.eleven{
+			background-image: url(img/5.jpg);
+			background-position: 0 -200px;
+			-webkit-transform: rotateY(-90deg) scale3d(1.2,1.2,1.2) translateZ(100px) ;
+		}
+ 		.seven{
+			background-color: #000;
+			-webkit-transform: rotateX(90deg) scale3d(1.2,1.2,1.2) translateZ(100px) ;
+		} 
+		.twelve{
+			background-color: #000;
+		}
+		.eight{
+			background-image: url(img/2.jpg);
+			background-position: 0 -200px;
+			-webkit-transform: scale3d(1.2,1.2,1.2) translateZ(100px) ;
+		}
+		.menu{
+			height: 50px;
+			width: 50px;
+			position: absolute;
+			background-color: #00c;
+			border-radius: 50% 50%;
+			top: 300px;
+			text-align: center;
+			line-height: 50px;
+			font-size: 40px;
+			color: #fff;
+			box-shadow: 2px 2px 2px rgba(0,0,0,0.7);
+			cursor: pointer;
+		}
+		#prev{
+			left: 100px;
+		}
+		#next{
+			right: 100px;
+		}
+	</style>
+</head>
+<body>
+	<span id="prev" class="menu">&lt;</span>
+	<span id="next" class="menu">&gt;</span>
+	<div id="container0">
+		<div class="cube one"></div>
+		<div class="cube two"></div> 
+		<div class="cube three"></div>
+		<div class="cube four"></div>
+		<div class="cube five"></div>
+		<div class="cube six"></div>
+	</div>
+	<div id="container1">
+		<div class="cube seven"></div>
+		<div class="cube eight"></div> 
+		<div class="cube nine"></div>
+		<div class="cube ten"></div>
+		<div class="cube eleven"></div>
+		<div class="cube twelve"></div>
+	</div>
+	<script>
+		(function(){
+			var oContainer0 = document.getElementById('container0');
+			var oContainer1 = document.getElementById('container1');
+			var oPrev = document.getElementById('prev');
+			var oNext = document.getElementById('next');
+			var index = 0;
+			//
+			oNext.onclick =function(){
+				index++;
+					oContainer0.style.WebkitTransform = 'rotateY('+(90*index)+'deg) translateY(-80px)'	;
+				setTimeout(function(){
+					oContainer1.style.WebkitTransform = 'rotateY('+(90*index)+'deg) translateY(50px)'	;
+				},50);
+					oContainer0.style.WebkitTransform = 'rotateY('+(90*index)+'deg) translateY(-10px)'	;
+				setTimeout(function(){
+					oContainer1.style.WebkitTransform = 'rotateY('+(90*index)+'deg) translateY(10px)'	;
+				},150);	
+			};
+			//
+			oPrev.onclick =function(){
+				index--;
+					oContainer0.style.WebkitTransform = 'rotateY('+(90*index)+'deg) translateY(-80px)'	;
+				setTimeout(function(){
+					oContainer1.style.WebkitTransform = 'rotateY('+(90*index)+'deg) translateY(50px)'	;
+				},50);
+					oContainer0.style.WebkitTransform = 'rotateY('+(90*index)+'deg) translateY(-10px)'	;
+				setTimeout(function(){
+					oContainer1.style.WebkitTransform = 'rotateY('+(90*index)+'deg) translateY(10px)'	;
+				},150);	
+			};
+		})();
+	</script>
+</body>		
+</html>
