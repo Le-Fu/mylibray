@@ -185,6 +185,7 @@ function addClass(elem, className){
     elem.className = elem.className + " " + className;
 }
 
+
 /**
  * 判断元素是否包含指定的class
  * @param elem 要查找的元素对象
@@ -208,3 +209,160 @@ function removeClass(elem, className){
     elem.className = trim(elem.className.replace(re, ""));
 }
 
+/**
+ * 为指定字符串去首尾空格
+ * @param str 将要去除空格的原字符串
+ */
+function trim(str){
+    return str.replace(/^\s+|\s+$/g, '');
+}
+
+/**
+ * 获取指定元素的高度
+ * @param elem 元素对象
+ * @return 元素的高度，不带单位
+ */
+function getHeight(elem){
+    return parseInt(_getStyle(elem, 'height'));
+}
+
+/**
+ * 获取指定元素的宽度
+ * @param elem 元素对象
+ * @return 元素的宽度，不带单位
+ */
+function getWidth(elem){
+    return parseInt(_getStyle(elem, 'width'));
+}
+
+/**
+ * 获取指定元素的完整的高度
+ * @param elem 元素对象
+ * @return 元素的高度，不带单位
+ */
+// Find the full, possible, height of an element (not the actual,
+// current, height)
+function fullHeight( elem ) {
+    // If the element is being displayed, then offsetHeight
+    // should do the trick, barring that, getHeight() will work
+    if ( _getStyle( elem, 'display' ) != 'none' )
+        return elem.offsetHeight || getHeight( elem );
+
+    // Otherwise, we have to deal with an element with a display
+    // of none, so we need to reset its CSS properties to get a more
+    // accurate reading
+    var old = resetCSS( elem, {
+        display: 'block',
+        visibility: 'hidden',
+        position: 'absolute'
+    });
+    // Figure out what the full height of the element is, using clientHeight
+    // and if that doesn't work, use getHeight
+    var h = elem.offsetHeight || getHeight( elem );
+    // Finally, restore the CSS properties back to what they were
+    restoreCSS( elem, old );
+
+    // and return the full height of the element
+    return h;
+}
+
+// Find the full, possible, width of an element (not the actual,
+// current, width)
+function fullWidth( elem ) {
+    // If the element is being displayed, then offsetWidth
+    // should do the trick, barring that, getWidth() will work
+    if ( _getStyle( elem, 'display' ) != 'none' )
+        return elem.offsetWidth || getWidth( elem );
+
+    // Otherwise, we have to deal with an element with a display
+    // of none, so we need to reset its CSS properties to get a more
+    // accurate reading
+    var old = resetCSS( elem, {
+        display: 'block',
+        visibility: 'hidden',
+        position: 'absolute'
+    });
+
+    // Figure out what the full width of the element is, using clientWidth
+    // and if that doesn't work, use getWidth
+    var w = elem.offsetWidth || getWidth( elem );
+
+    // Finally, restore the CSS properties back to what they were
+    restoreCSS( elem, old );
+
+    // and return the full width of the element
+    return w;
+}
+
+
+// A function used for setting a set of CSS properties, which
+// can then be restored back again later
+function resetCSS( elem, prop ) {
+    var old = {};
+
+    // Go through each of the properties
+    for ( var i in prop ) { //1.display
+        // Remember the old property value
+        old[ i ] = elem.style[ i ];
+
+        // And set the new value
+        elem.style[ i ] = prop[i];
+    }
+
+    // Retun the set of changed values, to be used by restoreCSS
+    return old;
+}
+
+// A function for restoring the side effects of the resetCSS function
+function restoreCSS( elem, prop ) {
+    // Reset all the properties back to their original values
+    for ( var i in prop )
+        elem.style[ i ] = prop[ i ];
+}
+
+/**
+ * 获取浏览器可视区高度
+ * @return 浏览器可视区高度，不带单位
+ */
+// Find the height of the viewport
+function windowHeight() {
+    // A shortcut, in case we’re using Internet Explorer 6 in Strict Mode
+    var de = document.documentElement;
+
+    // If the innerHeight of the browser is available, use that
+    return self.innerHeight ||
+
+        // Otherwise, try to get the height off of the root node
+        ( de && de.clientHeight ) ||
+
+        // Finally, try to get the height off of the body element
+        document.body.clientHeight;
+}
+
+/**
+ * 获取浏览器可视区宽度
+ * @return 浏览器可视区宽度，不带单位
+ */
+function windowWidth() {
+    // A shortcut, in case we’re using Internet Explorer 6 in Strict Mode
+    var de = document.documentElement;
+
+    // If the innerWidth of the browser is available, use that
+    return self.innerWidth ||
+
+        // Otherwise, try to get the width off of the root node
+        ( de && de.clientWidth ) ||
+
+        // Finally, try to get the width off of the body element
+        document.body.clientWidth;
+}
+
+/**
+ * 获取页面的实际高度
+ * @return 浏览器可视区高度，不带单位
+ */
+// Returns the height of the web page
+// (could change if new content is added to the page)
+function pageHeight() {
+    return document.body.scrollHeight;
+}
