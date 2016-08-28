@@ -1,0 +1,29 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+a{
+	text-decoration: none;
+}
+img{
+	border: 0;
+}
+ul, ol{
+	list-style: none;
+}
+#container{
+	margin: 100px auto;
+
+}
+#container .arrow{
+	height: 50px;
+	width: 40px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 40px;
+	background-color: #ccc;
+}
+#container img{
+	position: absolute;
+
+}
