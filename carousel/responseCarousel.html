@@ -2,16 +2,42 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" >
 	<title>responsiveCarousel</title>
+	<link rel="stylesheet" href="css/rc.css">
 </head>
 <body>
-	<div id="container">
-		<span class="arrow prev"></span>
-		<img src="img/1.jpg" alt="">
-		<img src="img/2.jpg" alt="">
-		<img src="img/3.jpg" alt="">
-		<span class="arrow next"></span>
+	<section id="slideshow-container">
+
+		<div class="myslides fade">
+			<div class="numbertext">1 / 3</div>
+			<img src="img/1.jpg" style="width: 100%">
+			<div class="text"></div>
+		</div>		
+
+		<div class="myslides fade">
+			<div class="numbertext">2 / 3</div>
+			<img src="img/2.jpg" style="width: 100%">
+			<div class="text"></div>
+		</div>		
+
+		<div class="myslides fade">
+			<div class="numbertext">3 / 3</div>
+			<img src="img/3.jpg" style="width: 100%">
+			<div class="text"></div>
+		</div>
+		
+		<a class="prev arrow" onclick="slidePlus(-1)">&#10094;</a>
+		<a class="next arrow" onclick="slidePlus(1)">&#10095;</a>
+	</section>
+	<hr>
+	<div id="index-dot" style="text-align: center;">
+		<span class="dot" onclick="currentSlide()"></span>
+		<span class="dot" onclick="currentSlide()"></span>
+		<span class="dot" onclick="currentSlide()"></span>
 	</div>
+
 	<script src="js/rc.js"></script>
 </body>
 </html>
+
