@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>animation</title>
+	<style>
+		#stage {
+			width: 800px;
+			height: 200px;
+			margin: 50px auto;
+			position: relative;
+			border: 1px solid #eee;
+		}
+		#wheel {
+			width: 50px;
+			height: 50px;
+			border-radius: 50px;
+			background-color: black;
+			position: absolute;
+			bottom: 0px;
+			left: 0;
+		}
+		#center {
+			width: 20px;
+			height: 20px;
+			background-color: white;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -10px;
+			margin-left: -10px;
+		}
+	
+	</style>
+</head>
+<body>
+	<div id="stage">
+		<div id="wheel"><div id="center"></div></div>
+	</div>
+	<script src="requestAnimationFrame.js"></script>
+	<script>
+		var oStage = document.getElementById('stage');
+		var oWhell = document.getElementById('wheel');
+		var step = 0;
+		var length = 0;
+
+		function move() {
+			step += 5;
+			oWhell.style.transform = 'rotate('+ step + 'deg)';
+			oWhell.style.left = step +'px';
+			if (step <= length) {
+				requestAnimationFrame(move);
+			}
+		}
+		
+		oStage.onclick = function(){
+			length = 600;
+			move();
+		};
+	</script>
+</body>
+</html>
