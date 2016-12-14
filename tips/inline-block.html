@@ -1,0 +1,33 @@
+<!-- 去除因为inline-block导致的空白 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>inline-block</title>
+	<style>
+		li {
+		    display:inline-block;
+		    padding:10px;
+		    background: orange;
+		    word-spacing:0;
+	    }
+		ul {
+		    width:100%;
+		    display:table;  /* 调教webkit*/
+		    word-spacing:-1em;
+		}
+		.nav li {
+			 *display:inline;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>菜单1</li>
+		<li>菜单2</li>
+		<li>菜单3</li>
+		<li>菜单4</li>
+		<li>菜单5</li>
+	</ul>	
+</body>
+</html>
