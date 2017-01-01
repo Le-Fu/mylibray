@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+    <title>Untitled Document</title>
+    
+</head>
+<body>
+    <script type="text/javascript">   
+        /*
+         * param1 Array 
+         * param2 Array
+         * return true or false
+         */
+        function arraysSimilar(arr1, arr2){
+        	if (Object.prototype.toString.apply(arr1).split(' ')[1].split(']')[0] == "Array" && Object.prototype.toString.apply(arr2).split(' ')[1].split(']')[0]== "Array" ) {
+
+
+	            var obj1 = {};
+			    var obj2 = {};
+				var flag = 0;
+				for(var i=0; i < arr1.length; i++) {
+					var key1 = Object.prototype.toString.apply(arr1[i]).split(' ')[1].split(']')[0];
+					if(obj1[key1]) {
+						obj1[key1] += 1;
+					} else {
+						obj1[key1] = '1';
+					}	
+				} 
+
+				for(var i=0; i<arr2.length; i++) {
+					var key2 = Object.prototype.toString.apply(arr2[i]).split(' ')[1].split(']')[0];
+					if(obj2[key2]) {
+						obj2[key2] += 1;
+					} else { 
+						obj2[key2] = '1';
+					}	
+				}
+
+				for(var k in obj1) {
+					if(obj2[k] && obj1[k].length == obj2[k].length && arr1.length === arr2.length  ) {
+					}else{
+						flag++;
+					}
+				}
+
+				if (flag) {
+					return false;
+				}else {
+					return true;
+				}
+
+	}else {
+        		return false;
+        	}
+        }
+       
+    </script>
+    <script src="testData.js"></script>
+</body>
+</html>

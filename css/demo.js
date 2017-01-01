@@ -9,5 +9,6 @@
 */
 
 window.onload = function () {
-	$().getTagName('p').css('color', 'red').click(function(){alert(this.innerHTML)});
-}  
+	// $().addRule(0, 'body', 'background:red', 0);
+	$().remove(0);
+}   
