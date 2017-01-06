@@ -1,11 +1,36 @@
-#box {
-	font-size: 30px;
+* {
+	margin: 0;
+	padding: 0;
 }
-
-.c {
-	background-color: orange;
+ul, ol {
+	list-style: none;
 }
+#header {
+	height: 50px;
+	background-color: #f5f5f5;
+}
+.container {
+	position: relative;
 
-.d {
-	text-decoration: underline;
+	margin: 0 auto; 
+	width: 80%;
+}
+.menu {
+	position: absolute;
+	right: 20px;
+	line-height: 50px;
+	cursor: pointer;
+}
+.menu ul {
+	position: absolute;
+	top: 50px;
+	left: -30px;
+	line-height: 30px;
+	width: 100px;
+	text-align: center;
+	background-color: #ff0;
+	display: none;
+}
+.menu ul li:hover{
+	background-color: #f68;
 }

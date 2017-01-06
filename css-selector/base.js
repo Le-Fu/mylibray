@@ -1,46 +1,91 @@
 //前台调用
-function $(_this) {
-	return new Base(_this);
+function $(args) {
+	return new Base(args);
 }
 
 //基础库
-function Base(_this) {
+function Base(args) {
 	//创建 一个数组，来保存获取的节点和节点数组
 	this.elements = [];
-	if(_this != undefined) {//_this是一个对象，undefined是一个对象，区别于typeof返回的‘undefined’
-		this.elements[0] = _this;
+
+	if (typeof args === 'string') {
+		switch(args.charAt(0)) {
+			case '#':
+				this.elements.push(this.getId(args.substring(1)));
+				break;
+			case '.':
+				this.elements = this.getClass(args.substring(1));
+				break;
+			default:
+				this.elements = this.getTag(args);
+		}
+	} else if (typeof args === 'object') {
+		alert('object');
+		if(args != undefined) {//args是一个对象，undefined是一个对象，区别于typeof返回的‘undefined’
+			this.elements[0] = args;
+		}
 	}
 }
 
 //获取ID节点
 Base.prototype.getId = function (id) {
-	this.elements.push(document.getElementById(id));
-	return this;
+	return document.getElementById(id);
 };
 
 //获取元素节点
 Base.prototype.getTag = function (tag, context) {
+	var temps = [];
 	context = context || document;
 	var tags = context.getElementsByTagName(tag);
 	for (var i = 0; i < tags.length; i++) {
-		this.elements.push(tags[i]);
+		temps.push(tags[i]);
 	}
-	return this;
-	};
+	return temps;
+};
 
 //获取class
 Base.prototype.getClass = function(clsName, context, tag){
-	context = document.getElementById(context) || document;
+	var temps = [];
+	context = context || document;
 	tag = tag || '*';
 	var arr = context.getElementsByTagName(tag);
 	for(var i=0; i<arr.length; i++){
 		var re = new RegExp("\\b"+clsName+"\\b", 'g');
 		if(re.test(arr[i].className)){
-				this.elements.push(arr[i]);
-			}
+			temps.push(arr[i]);
 		}
-		return this;
-	};
+	}
+	return temps;
+};
+
+//设置CSS选择器子节点
+Base.prototype.find = function (str) {
+	var childElements = [];
+	for (var i = 0; i < this.elements.length; i++) {
+		switch(str.charAt(0)) {
+			case '.':
+				/*var arr = this.elements[i].getElementsByTagName('*');
+				for(var j=0; j<arr.length; j++){
+					var re = new RegExp("\\b"+str.substring(1)+"\\b", 'g');
+					if(re.test(arr[j].className)){
+						childElements.push(arr[j]);
+					}
+				}*/
+				var temps = this.getClass(str.substring(1), this.elements[i]);
+				for (var j = 0; j < temps.length; j++) {
+					childElements.push(temps[j]);
+				}
+				break;
+			default:
+				var temps = this.getTag(str, this.elements[i]);
+				for (var j = 0; j < temps.length; j++) {
+					childElements.push(temps[j]);
+				}
+		}
+	}
+	this.elements = childElements;
+	return this;
+}
 
 //添加Class
 Base.prototype.addClass = function(clsName) {

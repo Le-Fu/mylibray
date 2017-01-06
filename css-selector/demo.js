@@ -6,11 +6,9 @@
 */
 
 window.onload = function () {
-	$().getClass('menu').hover(function(){
-		$(this).css('color', 'red');
-		$().getTag('ul').show();
-	}, function(){
-		$(this).css('color', 'green');
-		$().getTag('ul').hide();
-	});
+	// $().getId('box').css('color', 'red');
+	// console.log($('#box').css('color'));
+	// $('div').find('span').css('color', 'red');
+	// $('.a').css('color', 'red');
+	$('div').find('.a').css('color', 'blue');
 }    
