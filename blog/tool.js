@@ -5,7 +5,7 @@
 	addEvent.ID++
 */
 
-//跨浏览器检测
+//跨浏览器检测 
 
 
 (function (){	//闭包
@@ -118,7 +118,7 @@ function getInner() {
 		}
 	} else {
 		return {
-			width: document.documentElement.wclientWidth,
+			width: document.documentElement.clientWidth,
 			height: document.documentElement.clientHeight
 		}
 	}
