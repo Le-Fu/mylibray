@@ -153,7 +153,7 @@ Base.prototype.removeClass = function(clsName) {
 }
 
 //获取某一个节点，并返回这个节点对象
-Base.prototype.getEle = function(num) {
+Base.prototype.ge = function(num) {
 	return this.elements[num];
 	
 }
