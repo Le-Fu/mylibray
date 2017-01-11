@@ -34,7 +34,7 @@ $(function () {
 	// var oDiv = document.getElementById('login-box');	
 	// var oLoginH = document.getElementsByTagName('h2')[0];
 
-	loginBox.drag($('#login-box h2').ge(0));
+	loginBox.drag($('#login-box h2').first());
 
 
 });

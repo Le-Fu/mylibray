@@ -3,7 +3,7 @@ function $(args) {
 	return new Base(args);
 }
  
-//基础库
+//基础库 
 function Base(args) {
 	//创建 一个数组，来保存获取的节点和节点数组
 	this.elements = [];
@@ -204,7 +204,7 @@ Base.prototype.removeRule = function (num, index) {
 Base.prototype.css = function (attr, value) {
 	for(var i=0; i<this.elements.length; i++){
 		if (arguments.length == 1) {
-			getStyle(this.elements[i], attr)
+			return getStyle(this.elements[i], attr) + 'px';
 		}
 		this.elements[i].style[attr] = value;	
 	}
@@ -300,6 +300,39 @@ Base.prototype.resize = function (fn) {
 /*Base.prototype.drag = function (handler) {
 
 }*/
+
+//动画
+Base.prototype.animate = function (obj) {
+	for (var i = 0; i < this.elements.length; i++) {
+		var element = this.elements[i];
+		var attr = obj['attr'] == 'x' ? 'left' : obj['attr'] == 'y' ? 'top' : 'left';
+		var start = obj['start'] != undefined ? obj['start'] : getStyle(element, attr);
+		var t = obj['t'] != undefined ? obj['t'] : 50;
+		var step = obj['step'] != undefined ? obj['step']: 10;
+		var target = obj['alter'] + start;
+
+
+		if (start > target) { step = -step; }
+		clearInterval(window.timer);
+		timer = setInterval(function () {
+
+			if (step > 0 && Math.abs(getStyle(element, attr) - target) <= step) {
+				element.style[attr] = target + 'px';
+				clearInterval(timer);
+			} else if (step < 0 && (getStyle(element, attr) - target) <= Math.abs(step)) {
+				element.style[attr] = target + 'px';
+				clearInterval(timer);
+			} else {
+				//放在else永远不会停止运动通知执行，就不会出现303同时减到300的问题
+				//当时会出现不同时减到300的问题
+				element.style[attr] = getStyle(element, attr) + step + 'px';
+			}
+
+			document.getElementById('box').innerHTML += getStyle(element, attr) + '<br />';
+		}, t);
+	}
+	return this;
+}
 
 //插件入口
 Base.prototype.extend = function (name, fn) {
