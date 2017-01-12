@@ -12,9 +12,12 @@
 $(function () {
 	$('input').click(function() {
 		$("#box").animate({
-			'attr': 'y',
-			'step': 5,
-			'alter': -10
+			'attr': 'h',
+			// 'start': 200,
+			// 'alter': 50,
+			'target': 300,
+			'step': 3,
+			'speed': 10
 		});
 	});
 });

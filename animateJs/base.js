@@ -305,31 +305,66 @@ Base.prototype.resize = function (fn) {
 Base.prototype.animate = function (obj) {
 	for (var i = 0; i < this.elements.length; i++) {
 		var element = this.elements[i];
-		var attr = obj['attr'] == 'x' ? 'left' : obj['attr'] == 'y' ? 'top' : 'left';
+		var attr = obj['attr'] == 'x' ? 'left' : obj['attr'] == 'y' ? 'top' : 
+				   obj['attr'] == 'w' ? 'width' : obj['attr'] == 'h' ? 'height' : 
+				   obj['attr'] == 'o' ?  'opacity' : 'left';
+
 		var start = obj['start'] != undefined ? obj['start'] : getStyle(element, attr);
 		var t = obj['t'] != undefined ? obj['t'] : 50;
 		var step = obj['step'] != undefined ? obj['step']: 10;
-		var target = obj['alter'] + start;
 
+		var alter = obj['alter'];
+		var target = obj['target'];
+
+
+		var speed = obj['speed'] != undefined ? obj['speed'] : 6; 
+		var type = obj['type'] == 0 ? 'constant' : obj['type'] ==1 ? 'buffer' : 'buffer';
+
+		if (alter != undefined && target == undefined) {
+			target = alter + start;
+		} else if (alter == undefined && target == undefined) {
+			throw new Error('alter增量或target目标量必须有一个')
+		}
 
 		if (start > target) { step = -step; }
+		if (attr == 'opacity') {
+			element.style.opacity = parseInt(start) / 100;
+			element.style.filter = 'alpha(opacity='+parseInt(start)+')';
+		} else {
+			element.style[attr] = start + 'px';
+		}
 		clearInterval(window.timer);
 		timer = setInterval(function () {
 
-			if (step > 0 && Math.abs(getStyle(element, attr) - target) <= step) {
-				element.style[attr] = target + 'px';
-				clearInterval(timer);
-			} else if (step < 0 && (getStyle(element, attr) - target) <= Math.abs(step)) {
-				element.style[attr] = target + 'px';
-				clearInterval(timer);
+			if (type == 'buffer') {
+				step = (target -getStyle(element, attr))/speed;
+				step = step > 0 ? Math.ceil(step) : Math.floor(step);
+			}
+
+			if (attr == 'opacity') {
+				
 			} else {
-				//放在else永远不会停止运动通知执行，就不会出现303同时减到300的问题
-				//当时会出现不同时减到300的问题
-				element.style[attr] = getStyle(element, attr) + step + 'px';
+				if (step == 0) {
+					setTarget();
+				}else if (step > 0 && Math.abs(getStyle(element, attr) - target) <= step) {
+					setTarget();				
+				} else if (step < 0 && (getStyle(element, attr) - target) <= Math.abs(step)) {
+					setTarget();
+				} else {
+					//放在else永远不会停止运动通知执行，就不会出现303同时减到300的问题
+					//当时会出现不同时减到300的问题
+					element.style[attr] = getStyle(element, attr) + step + 'px';
+				}
+				
 			}
 
 			document.getElementById('box').innerHTML += getStyle(element, attr) + '<br />';
 		}, t);
+ 
+		function setTarget() {
+			element.style[attr] = target + 'px';
+			clearInterval(timer);
+		}
 	}
 	return this;
 }
