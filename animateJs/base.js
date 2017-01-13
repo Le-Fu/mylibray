@@ -309,7 +309,9 @@ Base.prototype.animate = function (obj) {
 				   obj['attr'] == 'w' ? 'width' : obj['attr'] == 'h' ? 'height' : 
 				   obj['attr'] == 'o' ?  'opacity' : 'left';
 
-		var start = obj['start'] != undefined ? obj['start'] : getStyle(element, attr);
+		var start = obj['start'] != undefined ? obj['start'] : 
+					attr == 'opacity' ? parseFloat(getStyle(element, attr)) * 100 :
+							parseFloat(getStyle(element, attr)) ;
 		var t = obj['t'] != undefined ? obj['t'] : 50;
 		var step = obj['step'] != undefined ? obj['step']: 10;
 
@@ -327,6 +329,7 @@ Base.prototype.animate = function (obj) {
 		}
 
 		if (start > target) { step = -step; }
+
 		if (attr == 'opacity') {
 			element.style.opacity = parseInt(start) / 100;
 			element.style.filter = 'alpha(opacity='+parseInt(start)+')';
@@ -337,34 +340,51 @@ Base.prototype.animate = function (obj) {
 		timer = setInterval(function () {
 
 			if (type == 'buffer') {
-				step = (target -getStyle(element, attr))/speed;
+				step = attr == 'opacity' ? (target - parseFloat(getStyle(element, attr)) * 100) / speed :
+							 (target - parseInt(getStyle(element, attr))) / speed;
 				step = step > 0 ? Math.ceil(step) : Math.floor(step);
 			}
 
 			if (attr == 'opacity') {
-				
+				if (step == 0) {
+					setOpacity();
+				} else if (step > 0 && Math.abs(parseFloat(getStyle(element, attr)) * 100 - target) <= step) {
+					setOpacity();
+				} else if (step < 0 && (parseFloat(getStyle(element, attr)) * 100 - target) <= Math.abs(step)) {
+					setOpacity();
+				} else {
+					var temp = parseInt(getStyle(element, attr)) * 100;
+					element.style.opacity = parseInt(temp + step) / 100;
+					element.style.filter = 'alpha(opacity='+parseInt(temp + step)+')';
+				}
 			} else {
 				if (step == 0) {
 					setTarget();
-				}else if (step > 0 && Math.abs(getStyle(element, attr) - target) <= step) {
+				}else if (step > 0 && Math.abs(parseInt(getStyle(element, attr)) - target) <= step) {
 					setTarget();				
-				} else if (step < 0 && (getStyle(element, attr) - target) <= Math.abs(step)) {
+				} else if (step < 0 && (parseInt(getStyle(element, attr)) - target) <= Math.abs(step)) {
 					setTarget();
 				} else {
 					//放在else永远不会停止运动通知执行，就不会出现303同时减到300的问题
 					//当时会出现不同时减到300的问题
-					element.style[attr] = getStyle(element, attr) + step + 'px';
+					element.style[attr] = parseInt(getStyle(element, attr)) + step + 'px';
 				}
 				
 			}
 
-			document.getElementById('box').innerHTML += getStyle(element, attr) + '<br />';
 		}, t);
+
+		function setOpacity() {
+			element.style.filter = 'alpha(opacity='+target+')';
+			element.style.opacity = target / 100;
+			clearInterval(window.timer);
+		} 
  
 		function setTarget() {
 			element.style[attr] = target + 'px';
 			clearInterval(timer);
 		}
+
 	}
 	return this;
 }

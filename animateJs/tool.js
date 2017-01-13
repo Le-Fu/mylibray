@@ -8,15 +8,17 @@
 //跨浏览器检测 
 
 
-(function (){	//闭包
-	window.sys = {};	//让外部可以访问，保存浏览器信息对象
-	var ua = navigator.userAgent.toLowerCase();	//获取历览器信息字符串
-	var s;				//浏览器信息数组，浏览器名称+版本
-	( s = ua.match(/msie ([\d.]+)/) ) ? sys.ie = s[1] : 
-	( s = ua.match(/firefox\/([\d.]+)/) ) ? sys.firefox = s[1] :
-	( s = ua.match(/chrome\/([\d.]+)/) ) ? sys.chrome = s[1] :
-	( s = ua.match(/version\/([\d.]+).*safari/) ) ? sys.safari = s[1] : 0;
-
+(function (){	
+	window.sys = {};
+	var ua = navigator.userAgent.toLowerCase();	
+	var s;		
+	(s = ua.match(/msie ([\d.]+)/)) ? sys.ie = s[1] :
+	(s = ua.match(/firefox\/([\d.]+)/)) ? sys.firefox = s[1] :
+	(s = ua.match(/chrome\/([\d.]+)/)) ? sys.chrome = s[1] : 
+	(s = ua.match(/opera\/.*version\/([\d.]+)/)) ? sys.opera = s[1] : 
+	(s = ua.match(/version\/([\d.]+).*safari/)) ? sys.safari = s[1] : 0;
+	
+	if (/webkit/.test(ua)) sys.webkit = ua.match(/webkit\/([\d.]+)/)[1];
 })();
 
 
@@ -127,9 +129,9 @@ function getInner() {
 function getStyle(ele, attr) {
 	var value;
 	if (typeof window.getComputedStyle != 'undefined') {
-		value = parseInt(window.getComputedStyle(ele, null)[attr]);
+		value = window.getComputedStyle(ele, null)[attr];
 	} else if (typeof ele.currentStyle != 'undefined') {
-		value = parseInt(ele.currentStyle[attr]);
+		value = ele.currentStyle[attr];
 	}
 	return value;
 }
@@ -159,3 +161,4 @@ function addDomLoaded(fn) {
 		});		
 	}
 }
+

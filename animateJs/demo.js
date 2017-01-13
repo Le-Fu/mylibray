@@ -12,10 +12,10 @@
 $(function () {
 	$('input').click(function() {
 		$("#box").animate({
-			'attr': 'h',
-			// 'start': 200,
-			// 'alter': 50,
-			'target': 300,
+			'attr': 'o',
+			'start': 0,
+			// 'alter': 100,
+			'target': 100,
 			'step': 3,
 			'speed': 10
 		});
