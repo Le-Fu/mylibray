@@ -1,0 +1,267 @@
+﻿body {
+	margin:0;
+	padding:0;
+	background:#fff url(images/header_bg.png) repeat-x;
+	font-size:12px;
+	color:#333;
+}
+ul {
+	padding:0;
+	margin:0;
+}
+ul li {
+	list-style-type:none;
+}
+#header {
+	width:900px;
+	height:30px;
+	margin:0 auto;
+}
+#header .logo {
+	width:100px;
+	height:30px;
+	float:left;
+}
+#header .logo img {
+	display:block;
+}
+#header .member {
+	width:70px;
+	height:30px;
+	line-height:30px;
+	float:right;
+	background:url(images/arrow.png) no-repeat 55px center;
+	cursor:pointer;
+	position:relative;
+}
+#header ul {
+	position:absolute;
+	top:30px;
+	left:-20px;
+	background:#FBF7E1;
+	width:100px;
+	height:120px;
+	border:1px solid #999;
+	border-top:none;
+	padding:10px 0 0 0;
+	display:none;
+}
+#header ul li {
+	height:25px;
+	line-height:25px;
+	text-indent:20px;
+	letter-spacing:1px;
+}
+#header ul li a {
+	display:block;
+	text-decoration:none;
+	color:#333;
+	background:url(images/arrow3.gif) no-repeat 5px 45%;
+}
+#header ul li a:hover {
+	background:#fc0 url(images/arrow4.gif) no-repeat 5px 45%;
+}
+#header .login {
+	float:right;
+	width:35px;
+	height:30px;
+	line-height:30px;
+	cursor:pointer;
+}
+#screen {
+	position:absolute;
+	top:0;
+	left:0;
+	background:#000;
+	z-index:9998;
+	filter:alpha(opacity=30);
+	opacity:0.3;
+	display:none;
+}
+#login {
+	width:350px;
+	height:250px;
+	border:1px solid #ccc;
+	position:absolute;
+	display:none;
+	z-index:9999;
+	background:#fff;
+}
+#login h2 {
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	font-size:14px;
+	letter-spacing:1px;
+	color:#666;
+	background:url(images/login_header.png) repeat-x;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #ccc;
+	margin:0 0 20px 0;
+	cursor:move;
+}
+#login h2 img {
+	float:right;
+	position:relative;
+	top:14px;
+	right:8px;
+	cursor:pointer;
+}
+#login div.user, #login div.pass {
+	font-size:14px;
+	color:#666;
+	padding:5px 0;
+	text-align:center;
+}
+#login input.text {
+	width:200px;
+	height:25px;
+	border:1px solid #ccc;
+	background:#fff;
+	font-size:14px;
+}
+#login .button {
+	text-align:center;
+	padding:20px 0;
+}
+#login input.submit {
+	width:107px;
+	height:30px;
+	background:url(images/login_button.png) no-repeat;
+	border:none;
+	cursor:pointer;
+}
+#login .other {
+	text-align:right;
+	padding:15px 10px;
+	color:#666;
+}
+#share {
+	width:210px;
+	height:315px;
+	border:1px solid #ccc;
+	position:absolute;
+	top:0;
+	left:-211px;
+	background:#fff;
+}
+#share h2 {
+	height:30px;
+	line-height:30px;
+	background:#eee;
+	padding:0;
+	margin:0;
+	font-size:14px;
+	color:#666;
+	text-indent:10px;
+}
+#share ul {
+	height:254px;
+	padding:3px 0 2px 5px;
+}
+#share ul li {
+	width:96px;
+	height:28px;
+	float:left;
+	padding:2px;
+}
+#share ul li a {
+	display:block;
+	width:95px;
+	height:26px;
+	line-height:26px;
+	text-decoration:none;
+	color:#666;
+	background-image:url(images/share_bg.png);
+	background-repeat:no-repeat;
+	text-indent:30px;
+}
+#share ul li a.a {
+	background-position:5px 4px;
+}
+#share ul li a.b {
+	background-position:5px -26px;
+}
+#share ul li a.c {
+	background-position:5px -56px;
+}
+#share ul li a.d {
+	background-position:5px -86px;
+}
+#share ul li a.e {
+	background-position:5px -116px;
+}
+#share ul li a.f {
+	background-position:5px -146px;
+}
+#share ul li a.g {
+	background-position:5px -176px;
+}
+#share ul li a.h {
+	background-position:5px -206px;
+}
+#share ul li a.i {
+	background-position:5px -236px;
+}
+#share ul li a.j {
+	background-position:5px -266px;
+}
+#share ul li a.k {
+	background-position:5px -296px;
+}
+#share ul li a.l {
+	background-position:5px -326px;
+}
+#share ul li a.n {
+	background-position:5px -356px;
+}
+#share ul li a.m {
+	background-position:5px -386px;
+}
+#share ul li a.o {
+	background-position:5px -416px;
+}
+#share ul li a.p {
+	background-position:5px -446px;
+}
+#share ul li a:hover {
+	opacity:0.7;
+	filter:alpha(opacity=70);
+	background-color:#eee;
+	color:#06f;
+}
+#share .share_footer {
+	height:26px;
+	background:#eee;
+	position:relative;
+}
+#share .share_footer a {
+	position:absolute;
+	top:7px;
+	left:140px;
+	padding:0 0 0 13px;
+	background:#eee url(images/share_bg.png) no-repeat 0 -477px;
+	text-decoration:none;
+	color:#666;
+}
+#share .share_footer a:hover {
+	color:#06f;
+	opacity:0.7;
+	filter:alpha(opacity=70);
+}
+#share .share_footer span {
+	display:block;
+	width:24px;
+	height:88px;
+	position:absolute;
+	top:-230px;
+	left:210px;
+	background:url(images/share.png) no-repeat;
+	cursor:pointer;
+}
+
+
+
+
+
