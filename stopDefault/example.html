@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>stopDefault</title>
+	<script src="stopDefault.js"></script>
+	<style>
+		iframe {
+			width: 300px;
+			height: 500px;
+			margin: 0 auto; 
+		}
+	</style>
+</head>
+<body>
+	<iframe src="http://opacity.cn" id="oiframe" frameborder="0"></iframe>
+	<a href="http://qq.com">QQ</a>
+	<a href="http://163.com">BAIDU</a>
+	<a href="http://t.tt">CHUIZI</a>
+
+	<script>
+		var iframe = document.getElementById('oiframe');
+		var a = document.getElementsByTagName('a');
+		for (var i = 0; i < a.length; i++) {
+			a[i].onclick = function (e) {
+				iframe.src = this.href;
+				return stopDefault(e);
+			}
+		}
+
+	</script>
+</body>
+</html>
